@@ -8,7 +8,7 @@ class MyRobot(wpilib.SampleRobot):
         '''Robot initialization function'''
         
         # object that handles basic drive operations
-        self.myRobot = wpilib.RobotDrive(0, 1)
+        self.myRobot = wpilib.RobotDrive(wpilib.Victor(0), wpilib.Victor(1))
         self.myRobot.setExpiration(0.1)
         
         # joysticks 1 & 2 on the driver station
