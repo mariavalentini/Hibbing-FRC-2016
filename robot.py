@@ -11,9 +11,12 @@ class MyRobot(wpilib.SampleRobot):
         self.myRobot = wpilib.RobotDrive(wpilib.Victor(0), wpilib.Victor(1))
         self.myRobot.setExpiration(0.1)
         
+		self.launcherTop = wpilib.Victor(2)
+		self.launcherBottom = wpilib.Victor(3)
+		self.ballIntake = wpilib.Victor(4)
+		
         # joysticks 1 & 2 on the driver station
-        self.leftStick = wpilib.Joystick(0)
-        self.rightStick = wpilib.Joystick(1)
+        self.stick = wpilib.Joystick(0)
         
     def operatorControl(self):
         '''Runs the motors with tank steering'''
@@ -21,7 +24,20 @@ class MyRobot(wpilib.SampleRobot):
         self.myRobot.setSafetyEnabled(True)
         
         while self.isOperatorControl() and self.isEnabled():
-            self.myRobot.arcadeDrive(self.leftStick)
+            self.myRobot.arcadeDrive(self.stick)
+			
+			if self.stick.getRawButton(1):
+				self.launcherTop.set(1)
+				self.launcherBottom.set(-1)
+			else:
+				self.launcherTop.set(0)
+				self.launcherBottom.set(0)
+				
+			if self.stick.getRawButton(8):
+				self.ballIntake.set(1)
+			else:
+				self.ballIntake.set(0)
+				
             wpilib.Timer.delay(0.005) # wait for a motor update time
             
 if __name__ == '__main__':
