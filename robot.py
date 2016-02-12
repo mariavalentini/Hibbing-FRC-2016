@@ -11,9 +11,11 @@ class MyRobot(wpilib.SampleRobot):
         self.myRobot = wpilib.RobotDrive(wpilib.Victor(0), wpilib.Victor(1))
         self.myRobot.setExpiration(0.1)
 
-        self.launcherTop = wpilib.Victor(2)
-        self.launcherBottom = wpilib.Victor(3)
-        self.ballIntake = wpilib.Victor(4)
+        self.launcherTop = wpilib.Spark(0)
+        self.launcherBottom = wpilib.Spark(1)
+        self.ballIntake = wpilib.Victor(2)
+        self.winch1 = wpilib.Victor(3)
+        self.winch2 = wpilib.Victor(4)
 
         # joysticks 1 & 2 on the driver station
         self.stick = wpilib.Joystick(0)
