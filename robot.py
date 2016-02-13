@@ -8,14 +8,16 @@ class MyRobot(wpilib.SampleRobot):
         '''Robot initialization function'''
 
         # object that handles basic drive operations
-        self.myRobot = wpilib.RobotDrive(wpilib.Victor(0), wpilib.Victor(1))
+        self.driveRight = wpilib.Victor(0)
+        self.driveLeft = wpilib.Victor(1)
+        self.myRobot = wpilib.RobotDrive(self.driveRight, self.driveLeft)
         self.myRobot.setExpiration(0.1)
 
-        self.launcherTop = wpilib.Spark(0)
-        self.launcherBottom = wpilib.Spark(1)
-        self.ballIntake = wpilib.Victor(2)
-        self.winch1 = wpilib.Victor(3)
-        self.winch2 = wpilib.Victor(4)
+        self.launcherTop = wpilib.Spark(2)
+        self.launcherBottom = wpilib.Spark(3)
+        self.ballIntake = wpilib.Victor(4)
+        self.winch1 = wpilib.Victor(5)
+        self.winch2 = wpilib.Victor(6)
 
         # joysticks 1 & 2 on the driver station
         self.stick = wpilib.Joystick(0)
@@ -26,17 +28,22 @@ class MyRobot(wpilib.SampleRobot):
         self.myRobot.setSafetyEnabled(True)
 
         while self.isOperatorControl() and self.isEnabled():
-            self.myRobot.arcadeDrive(self.stick)
+            self.myRobot.tankDrive(-self.stick.getRawAxis(1),-self.stick.getRawAxis(3))
 
             if self.stick.getRawButton(1):
+                self.launcherTop.set(-1)
+                self.launcherBottom.set(1)
+            elif self.stick.getRawButton(3):
                 self.launcherTop.set(1)
-                self.launcherBottom.set(-1)
+                self.launcherTop.set(-1)
             else:
                 self.launcherTop.set(0)
                 self.launcherBottom.set(0)
 
             if self.stick.getRawButton(8):
                 self.ballIntake.set(1)
+            elif self.stick.getRawButton(7):
+                self.ballIntake.set(-1)
             else:
                 self.ballIntake.set(0)
 
