@@ -30,12 +30,12 @@ class MyRobot(wpilib.SampleRobot):
         while self.isOperatorControl() and self.isEnabled():
             self.myRobot.tankDrive(-self.stick.getRawAxis(1),-self.stick.getRawAxis(3))
 
-            if self.stick.getRawButton(1):
-                self.launcherTop.set(-1)
-                self.launcherBottom.set(1)
-            elif self.stick.getRawButton(3):
-                self.launcherTop.set(1)
-                self.launcherTop.set(-1)
+            if self.stick.getRawButton(6):
+                self.launcherTop.set(-0.95)
+                self.launcherBottom.set(0.95)
+            elif self.stick.getRawButton(5):
+                self.launcherTop.set(0.95)
+                self.launcherBottom.set(-0.95)
             else:
                 self.launcherTop.set(0)
                 self.launcherBottom.set(0)
