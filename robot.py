@@ -33,16 +33,16 @@ class MyRobot(wpilib.SampleRobot):
             if self.stick.getRawButton(6):
                 self.launcherTop.set(-0.95)
                 self.launcherBottom.set(0.95)
-            elif self.stick.getRawButton(5):
+            elif self.stick.getRawButton(3):
                 self.launcherTop.set(0.95)
                 self.launcherBottom.set(-0.95)
             else:
                 self.launcherTop.set(0)
                 self.launcherBottom.set(0)
 
-            if self.stick.getRawButton(8):
+            if self.stick.getRawButton(5):
                 self.ballIntake.set(1)
-            elif self.stick.getRawButton(7):
+            elif self.stick.getRawButton(4):
                 self.ballIntake.set(-1)
             else:
                 self.ballIntake.set(0)
