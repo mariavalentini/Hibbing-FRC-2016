@@ -18,10 +18,22 @@ class MyRobot(wpilib.SampleRobot):
         self.ballIntake = wpilib.Victor(4)
         self.winch1 = wpilib.Victor(5)
         self.winch2 = wpilib.Victor(6)
+        
+        self.armIn = wpilib.Solenoid(0)
+        self.armOut = wpilib.Solenoid(1)
+        self.liftUp = wpilib.Solenoid(2)
+        self.liftDown = wpilib.Solenoid(3)
 
         # joysticks 1 & 2 on the driver station
         self.stick = wpilib.Joystick(0)
 
+    def autonomous(self):
+        '''Autonomous initialization function'''
+        self.myRobot.setSafetyEnabled(False)
+        self.myRobot.tankDrive(0.75,0.75)
+        wpilib.Timer.delay(5)
+        self.myRobot.tankDrive(0,0)
+        
     def operatorControl(self):
         '''Runs the motors with tank steering'''
 
@@ -46,7 +58,21 @@ class MyRobot(wpilib.SampleRobot):
                 self.ballIntake.set(-1)
             else:
                 self.ballIntake.set(0)
-
+            
+            if self.stick.getRawButton(1):
+                self.armIn.set(True)
+                self.armOut.set(False)
+            else:
+                self.armIn.set(False)
+                self.armOut.set(True)
+                
+            if self.stick.getRawButton(2):
+                self.liftUp.set(True)
+                self.liftDown.set(False)
+            else:
+                self.liftUp.set(False)
+                self.liftDown.set(True)
+                
             wpilib.Timer.delay(0.005) # wait for a motor update time
 
 if __name__ == '__main__':
